@@ -42,10 +42,9 @@ const App = () => {
     getTeam()
   }, [])
 
-  const fetchBerryCatalog = async () => {
-    const res = await fetch('http://localhost:5000/berries')
-    const data = await res.json()
-    return data
+  const getBerryCatalog = async () => {
+    const berriesFromServer = await fetchBerryCatalog()
+    setBerryCatalog(berriesFromServer)
   }
 
   const fetchBox = async () => {
