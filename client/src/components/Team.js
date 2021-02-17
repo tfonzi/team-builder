@@ -28,8 +28,8 @@ const Team = ({team, inspect, onDragStart, onDragOver, onDrop}) => {
                 <Paper>
                     <GridList cols={3} spacing={3}>
                         {team.map((obj) => (
-                        <GridListTile key={obj.id}>
-                            <TeamMember key={obj.id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
+                        <GridListTile key={obj._id}>
+                            <TeamMember key={obj._id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
                         </GridListTile>
                         ))}
                     </GridList>

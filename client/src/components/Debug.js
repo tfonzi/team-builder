@@ -5,31 +5,31 @@ import FileBase from 'react-file-base64';
 
 const Debug = ({addBerry}) => {
     
-    const [berryName, setBerryName] = useState('')
-    const [berryImage, setBerryImage] = useState('')
-    const [berryDescription, setBerryDescription] = useState('')
+    const [name, setName] = useState('')
+    const [image, setImage] = useState('')
+    const [description, setDescription] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault() //prevents from submitting to page
 
-        if(!berryName){
+        if(!name){
             alert('Please add Berry Name')
             return
         }
-        if(!berryImage){
+        if(!image){
             alert('Please add Berry Image')
             return
         }
-        if(!berryDescription){
+        if(!description){
             alert('Please add Berry Description')
             return
         }
 
-        addBerry({berryName, berryImage, berryDescription})
+        addBerry({name, image, description})
 
-        setBerryName('')
-        setBerryImage('')
-        setBerryDescription('')
+        setName('')
+        setImage('')
+        setDescription('')
     }
     return (
         <>
@@ -37,15 +37,15 @@ const Debug = ({addBerry}) => {
             <form  onSubmit={onSubmit}>
                 <div className="form-control">
                     <label>Berry Name</label>
-                    <input type="text" placeholder="Add Berry Name" value={berryName} onChange={(e) => setBerryName(e.target.value)} />
+                    <input type="text" placeholder="Add Berry Name" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className="form-control">
                     <label>Berry Image</label>
-                    <FileBase type="file" multiple={false} onDone={({ base64 }) => setBerryImage(base64)} />                
+                    <FileBase type="file" multiple={false} onDone={({ base64 }) => setImage(base64)} />                
                 </div>
                 <div className="form-control form-control-check">
                     <label>Berry Description</label>
-                    <input type="text" placeholder="Add Berry Description" value={berryDescription} onChange={(e) => setBerryDescription(e.target.value)} />
+                    <input type="text" placeholder="Add Berry Description" value={description} onChange={(e) => setDescription(e.target.value)} />
                 </div>
 
                 <input type="submit" value="Add Berry" className="btn btn-block" />

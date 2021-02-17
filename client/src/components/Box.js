@@ -18,8 +18,8 @@ const Box = ({box, inspect, onDragStart, onDragOver, onDrop}) => {
             <Paper>
                 <GridList cols={6} spacing={3}>
                     {box.map((obj) => (
-                    <GridListTile key={obj.id}>
-                        <BoxObj key={obj.id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
+                    <GridListTile key={obj._id}>
+                        <BoxObj key={obj._id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
                     </GridListTile>
                     ))}
                 </GridList>

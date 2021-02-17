@@ -13,8 +13,8 @@ const Berries = ({berries, inspect, onDragStart}) => {
             <Paper>
                 <GridList cols={3} spacing={3}>
                     {berries.map((berry) => (
-                    <GridListTile key={berry.id}>
-                        <Berry key={berry.id} onDragStart={onDragStart} inspect={inspect} berry={berry} />
+                    <GridListTile key={berry._id}>
+                        <Berry key={berry._id} onDragStart={onDragStart} inspect={inspect} berry={berry} />
                     </GridListTile>
                     ))}
                 </GridList>

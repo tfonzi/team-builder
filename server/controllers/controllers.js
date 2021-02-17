@@ -181,7 +181,7 @@ export const moveTo = async (req,res) => {
                     const newBoxObj = new BoxObjData({name, image, description, nickname})
                     await newBoxObj.save()
 
-                    res.status(200).json({ message: `Team Object of id:${id} moved successfully to Box.` })
+                    res.status(200).json(newBoxObj)
                 }
                 else{
                     res.status(404).json({ message: error.message })
@@ -202,7 +202,7 @@ export const moveTo = async (req,res) => {
                     const newTeamObj = new TeamObjData({name, image, description, nickname})
                     await newTeamObj.save()
 
-                    res.status(200).json({ message: `Box Object of id:${id} moved successfully to Team.` })
+                    res.status(200).json(newTeamObj)
 
                 }
                 else{

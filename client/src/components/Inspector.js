@@ -6,20 +6,20 @@ import { TextField } from '@material-ui/core';
 
 import {useState} from 'react'
 
-const Inspector = ({view, data, onDragOver, onDrop, updateNickname, AddObjectToBox, AddObjectToTeam, removeObj, teamLength}) => {
+const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectToBox, AddObjectToTeam, removeObj}) => {
     
     const [nickname, setNickname] = useState("")
 
     const sendNickname = () =>{
         if(nickname){
             
-            if(view == 2)
-                updateNickname("box", data.id, nickname)
+            if(view == "inspectBox")
+                updateNickname("box", object._id, nickname)
 
-            if(view == 3)
-                updateNickname("team", data.id, nickname)
+            if(view == "inspectTeam")
+                updateNickname("team", object._id, nickname)
             
-            data.nickname = nickname
+            object.nickname = nickname
             setNickname("")
         }
         else{
@@ -29,24 +29,19 @@ const Inspector = ({view, data, onDragOver, onDrop, updateNickname, AddObjectToB
 
     const sendObject = (source) =>{
 
-        var copy = JSON.parse(JSON.stringify(data)) //creates deep copy of original obj
-        copy.type = "berry"
+        var copy = JSON.parse(JSON.stringify(object)) //creates deep copy of original obj
         copy.nickname = ""
-        delete copy.id
+        delete copy._id
         if(source == "box"){
             AddObjectToBox(copy)
         }
 
         if(source == "team"){
-            if(teamLength >= 6){
-                alert("You cannot add more than 6 team members")
-                return
-            }
             AddObjectToTeam(copy)
         }
     }
 
-    if(!data){
+    if(!object){
         return(
             <Paper
                 onDragOver={(e) => onDragOver(e)} 
@@ -63,7 +58,7 @@ const Inspector = ({view, data, onDragOver, onDrop, updateNickname, AddObjectToB
     else{
         switch(view){
 
-            case 1: //BerryCatalog Inspect
+            case "inspectBerryCatalog": //BerryCatalog Inspect
                 return(
                         <Paper 
                             onDragOver={(e) => onDragOver(e, "inspector")} 
@@ -71,9 +66,9 @@ const Inspector = ({view, data, onDragOver, onDrop, updateNickname, AddObjectToB
                                                     e.dataTransfer.getData("id"),
                                                     "inspector")}
                         >
-                            <Typography variant="h5">{data.berryName}</Typography>
-                            <img draggable="false" src={data.berryImage} alt="berry image" width="300" height="300"/>
-                            <Typography variant="body1">{data.berryDescription}</Typography>
+                            <Typography variant="h5">{object.name}</Typography>
+                            <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
+                            <Typography variant="body1">{object.description}</Typography>
                             <Grid container>
                                 <Grid item xs>
                                     <Button onClick={() => sendObject("team")} variant="contained" color="primary">Add to Team</Button>
@@ -84,7 +79,7 @@ const Inspector = ({view, data, onDragOver, onDrop, updateNickname, AddObjectToB
                             </Grid>
                         </Paper>
                     )
-            case 2: //Box Inspect 
+            case "inspectBox": //Box Inspect 
                 return(
                     <Paper 
                         onDragOver={(e) => onDragOver(e, "inspector")} 
@@ -93,24 +88,24 @@ const Inspector = ({view, data, onDragOver, onDrop, updateNickname, AddObjectToB
                                                 "inspector")}
                     >
                         <>
-                            <Typography variant="h5">{data.berryName}</Typography>
-                            {(data.nickname) && <Typography variant="h6">"{data.nickname}"</Typography>}
-                            <img draggable="false" src={data.berryImage} alt="berry image" width="300" height="300"/>
-                            <Typography variant="body1">{data.berryDescription}</Typography>
+                            <Typography variant="h5">{object.name}</Typography>
+                            {(object.nickname) && <Typography variant="h6">"{object.nickname}"</Typography>}
+                            <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
+                            <Typography variant="body1">{object.description}</Typography>
                             <Grid container>
                                 <Grid item xs>
                                     <Button onClick={sendNickname} variant="contained" color="primary">Change Nickname</Button>
                                     <input type="text" placeholder="Enter nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} />
                                 </Grid>
                                 <Grid item xs>
-                                    <Button onClick={() => removeObj(data.id, "box")} variant="contained" color="secondary">Remove from box</Button>
+                                    <Button onClick={() => removeObj(object._id, "box")} variant="contained" color="secondary">Remove from box</Button>
                                 </Grid>
                             </Grid>
                         </>
                     </Paper>
                 )
 
-            case 3: //Team Inspect 
+            case "inspectTeam": //Team Inspect 
                 return(
                     <Paper 
                         onDragOver={(e) => onDragOver(e, "inspector")} 
@@ -119,17 +114,17 @@ const Inspector = ({view, data, onDragOver, onDrop, updateNickname, AddObjectToB
                                                 "inspector")}
                     >
                         <>
-                            <Typography variant="h5">{data.berryName}</Typography>
-                            {(data.nickname) && <Typography variant="h6">"{data.nickname}"</Typography>}
-                            <img draggable="false" src={data.berryImage} alt="berry image" width="300" height="300"/>
-                            <Typography variant="body1">{data.berryDescription}</Typography>
+                            <Typography variant="h5">{object.name}</Typography>
+                            {(object.nickname) && <Typography variant="h6">"{object.nickname}"</Typography>}
+                            <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
+                            <Typography variant="body1">{object.description}</Typography>
                             <Grid container>
                                 <Grid item xs>
                                     <Button onClick={sendNickname} variant="contained" color="primary">Change Nickname</Button>
                                     <input type="text" placeholder="Enter nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} />
                                 </Grid>
                                 <Grid item xs>
-                                    <Button onClick={() => removeObj(data.id, "team")} variant="contained" color="secondary">Remove from team</Button>
+                                    <Button onClick={() => removeObj(object._id, "team")} variant="contained" color="secondary">Remove from team</Button>
                                 </Grid>
                             </Grid>
                         </>
