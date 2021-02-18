@@ -17,5 +17,6 @@ steps:
 
 - script: |
     npm install server
-    npm run --prefix server ${server}
+    cd server
+    npm run server
   displayName: 'npm install and build'
