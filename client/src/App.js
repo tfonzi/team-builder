@@ -21,6 +21,8 @@ const App = () => {
   const [box, setBox] = useState([])
   const [berryCatalog, setBerryCatalog] = useState([])
 
+  const backend_url = "https://btb-backend.azurewebsites.net"
+
   useEffect(() => {
 
     const getBerryCatalog = async () => {
@@ -44,29 +46,29 @@ const App = () => {
   }, [])
 
   const fetchBerryCatalog = async () => {
-    const res = await axios.get('http://localhost:5000/berries')
+    const res = await axios.get(`${backend_url}/berries`)
     return res.data
   }
 
   const fetchBox = async () => {
-    const res = await axios.get('http://localhost:5000/box')
+    const res = await axios.get(`${backend_url}/box`)
     return res.data
   }
 
   const fetchTeam = async () => {
-    const res = await axios.get('http://localhost:5000/team')
+    const res = await axios.get(`${backend_url}/team`)
     return res.data
   }
 
   const addBerryToCatalog = (berry) => {
-    axios.post('http://localhost:5000/berries', berry)
+    axios.post(`${backend_url}/berries`, berry)
       .then(res =>{
             setBerryCatalog([...berryCatalog, res.data])
       })
   }
 
   const addObjToBox = (obj) => {
-    axios.post('http://localhost:5000/box', obj)
+    axios.post(`${backend_url}/box`, obj)
       .then(res =>{
             setBox([...box, res.data])
       })
@@ -79,14 +81,14 @@ const App = () => {
       return
     }
 
-    axios.post('http://localhost:5000/box', obj)
+    axios.post(`${backend_url}/box`, obj)
       .then(res =>{
             setTeam([...team, res.data])
       })
   }
 
   const removeObjfromTeam = (id) => {
-    axios.delete(`http://localhost:5000/team/${id}`)
+    axios.delete(`${backend_url}/team/${id}`)
       .then(res =>{
         setInspectView("")
         setTeam(team.filter((obj) => obj._id != id))
@@ -94,7 +96,7 @@ const App = () => {
   }
 
   const removeObjfromBox = (id) => {
-    axios.delete(`http://localhost:5000/box/${id}`)
+    axios.delete(`${backend_url}/box/${id}`)
       .then(res =>{
         setInspectView("")
         setBox(box.filter((obj) => obj._id != id))
@@ -122,12 +124,12 @@ const App = () => {
   }
 
   const fetchBoxObj = async (id) => {
-    const res = await axios.get(`http://localhost:5000/box/${id}`)
+    const res = await axios.get(`${backend_url}/box/${id}`)
     return res.data
   }
 
   const fetchTeamObj = async (id) => {
-    const res = await axios.get(`http://localhost:5000/team/${id}`)
+    const res = await axios.get(`${backend_url}/team/${id}`)
     return res.data
   }
 
@@ -147,7 +149,7 @@ const App = () => {
 
     const body = {source, destination}
 
-    axios.post(`http://localhost:5000/${id}`, body)
+    axios.post(`${backend_url}/${id}`, body)
       .then(res =>{
           if(source == "box"){
             setBox(box.filter((obj) => obj._id != id))
@@ -176,7 +178,7 @@ const App = () => {
         var copy = box.find((obj) => obj._id == id)
         copy.nickname = nickname
 
-        axios.patch(`http://localhost:5000/box/${id}`, copy)
+        axios.patch(`${backend_url}/box/${id}`, copy)
           .then(res =>{
             setBox(box.map(
               (obj) => obj.id === id //For every obj, if obj._id equals id
@@ -191,7 +193,7 @@ const App = () => {
         var copy = team.find((obj) => obj._id == id)
         copy.nickname = nickname
 
-        axios.patch(`http://localhost:5000/team/${id}`, copy)
+        axios.patch(`${backend_url}/team/${id}`, copy)
           .then(res =>{
             setTeam(team.map(
               (obj) => obj.id === id //For every obj, if obj._id equals id
