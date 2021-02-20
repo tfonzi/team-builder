@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }))
 
-const MenuBar = ({title, teamView, berryView}) => {
+const MenuBar = ({title, teamView, berryView, pokemonCatalogView}) => {
 
     const classes = useStyles()
 
@@ -35,6 +35,7 @@ const MenuBar = ({title, teamView, berryView}) => {
                  </Typography>
                  <Button onClick={teamView} className={classes.menuButton} variant="contained" size="medium">Team </Button>
                  <Button onClick={berryView} className={classes.menuButton} variant="contained" size="medium">Berries</Button>
+                 <Button onClick={pokemonCatalogView} className={classes.menuButton} variant="contained" size="medium">Pokemon Catalog</Button>
                  <Link to='/debug'> Debug</Link>
              </Toolbar>
         </AppBar>

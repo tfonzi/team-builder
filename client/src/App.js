@@ -6,11 +6,14 @@ import axios from 'axios';
 import MenuBar from './components/MenuBar'
 import Team from './components/Team'
 import Berries from './components/Berries'
+import PokemonCatalog from './components/PokemonCatalog'
 import Inspector from './components/Inspector'
 import Box from './components/Box'
 import Debug from './components/Debug'
 
 import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+
 
 const App = () => {
   
@@ -21,7 +24,11 @@ const App = () => {
   const [box, setBox] = useState([])
   const [berryCatalog, setBerryCatalog] = useState([])
 
+  const [pokemonCatalog, setPokemonCatalog] = useState([])
+
+
   const backend_url = "https://btb-backend.azurewebsites.net"
+  //const backend_url = "http://localhost:5000"
 
   useEffect(() => {
 
@@ -40,9 +47,30 @@ const App = () => {
       setTeam(teamObjects)
     }
 
+    const getPokemonCatalog = () => {
+      
+      axios.get("https://pokeapi.co/api/v2/pokemon/")
+        .then( res => {
+          //const count = res.data.count
+          const count = 898
+          axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${count}`)
+            .then(res2 =>{
+              const pokemons = res2.data.results
+              var id = 1
+              for(id = 1; id <= count; id++){
+                pokemons[id - 1].id = id
+                pokemons[id - 1].image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+              }
+              setPokemonCatalog(pokemons)
+            })
+        })
+    }
+
+
     getBerryCatalog()
     getBox()
     getTeam()
+    getPokemonCatalog()
   }, [])
 
   const fetchBerryCatalog = async () => {
@@ -216,6 +244,10 @@ const App = () => {
     setTeamBerriesToggle("berryCatalogView")
   }
 
+  const changeViewToPokemonCatalog = () => {
+    setTeamBerriesToggle("pokemonCatalogView")
+  }
+
   const inspectBerry = (id) => {
     const data = berryCatalog.find(berry => berry._id == id)
     setInspectData(data)
@@ -317,13 +349,17 @@ const App = () => {
       <Router>
         <Route path='/' exact render={(props) => (
             <>
-              <MenuBar title="Berry Team Builder" berryView={changeViewToBerries} teamView={changeViewToTeams} />
+              <MenuBar title="Berry Team Builder" berryView={changeViewToBerries} teamView={changeViewToTeams} pokemonCatalogView={changeViewToPokemonCatalog} />
+              
               <Grid container>
-                <Grid item sm>
-                  {(teamBerriesToggle == "teamView") && <Team onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} inspect={inspectTeam} team={team} />}
-                  {(teamBerriesToggle == "berryCatalogView") && <Berries onDragStart={onDragStart} inspect={inspectBerry} berries={berryCatalog} />}
+                <Grid item>
+                  <Paper height="500">
+                    {(teamBerriesToggle == "teamView") && <Team onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} inspect={inspectTeam} team={team} />}
+                    {(teamBerriesToggle == "berryCatalogView") && <Berries onDragStart={onDragStart} inspect={inspectBerry} berries={berryCatalog} />}
+                    {(teamBerriesToggle == "pokemonCatalogView") && <PokemonCatalog onDragStart={onDragStart} inspect={inspectBerry} pokemons={pokemonCatalog} />}
+                  </Paper>
                 </Grid>
-                <Grid item sm height="100%">
+                <Grid item>
                   <Inspector  onDragOver={onDragOver} onDrop={onDrop} view={inspectView} object={inspectData} updateNickname={updateNickname} AddObjectToBox={addObjToBox} AddObjectToTeam={addObjToTeam} removeObj={removeObj} />
                 </Grid>
               </Grid>
