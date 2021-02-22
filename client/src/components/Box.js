@@ -1,30 +1,24 @@
-import Paper from '@material-ui/core/Paper'
-import GridList from '@material-ui/core/GridList'
-import GridListTile from '@material-ui/core/GridListTile'
-
 import BoxObj from './BoxObj'
 
-
+import './components.css'
 
 const Box = ({box, inspect, onDragStart, onDragOver, onDrop}) => {
     
     return (
-        <Paper onDragOver={(e) => onDragOver(e)} 
+        <div className="box" onDragOver={(e) => onDragOver(e)} 
                 onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"), 
                                         e.dataTransfer.getData("id"), 
                                         'box')}
         >
-            <h1>Box</h1>
-            <Paper>
-                <GridList cols={6} spacing={3}>
-                    {box.map((obj) => (
-                    <GridListTile key={obj._id}>
-                        <BoxObj key={obj._id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
-                    </GridListTile>
-                    ))}
-                </GridList>
-            </Paper>
-        </Paper>
+            <h3 className="box-header">Box</h3>
+            <div className="box-flex">
+                {box.map((obj) => (
+                <div className="box-object" key={obj._id}>
+                    <BoxObj key={obj._id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
+                </div>
+                ))}
+            </div>
+        </div>
     )
 }
 

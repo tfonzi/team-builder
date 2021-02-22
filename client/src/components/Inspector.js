@@ -1,8 +1,9 @@
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+
+
 
 import {useState} from 'react'
 
@@ -43,7 +44,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
 
     if(!object){
         return(
-            <Paper
+            <div
                 onDragOver={(e) => onDragOver(e)} 
                 onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                         e.dataTransfer.getData("id"),
@@ -52,7 +53,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
                 <div height="500px">
                     <h1>Click to Inspect!</h1>
                 </div>
-            </Paper>
+            </div>
         )
     }
     else{
@@ -60,80 +61,80 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
 
             case "inspectBerryCatalog": //BerryCatalog Inspect
                 return(
-                        <Paper 
+                        <div 
                             onDragOver={(e) => onDragOver(e, "inspector")} 
                             onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                     e.dataTransfer.getData("id"),
                                                     "inspector")}
                         >
-                            <Typography variant="h5">{object.name}</Typography>
+                            <h4>{object.name}</h4>
                             <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
-                            <Typography variant="body1">{object.description}</Typography>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Button onClick={() => sendObject("team")} variant="contained" color="primary">Add to Team</Button>
-                                </Grid>
-                                <Grid item xs>
-                                    <Button onClick={() => sendObject("box")} variant="contained" color="primary">Add to Box</Button>
-                                </Grid>
-                            </Grid>
-                        </Paper>
+                            <h5>{object.description}</h5>
+                            <Row>
+                                <Col>
+                                    <Button onClick={() => sendObject("team")} >Add to Team</Button>
+                                </Col>
+                                <Col>
+                                    <Button onClick={() => sendObject("box")} >Add to Box</Button>
+                                </Col>
+                            </Row>
+                        </div>
                     )
             case "inspectBox": //Box Inspect 
                 return(
-                    <Paper 
+                    <div 
                         onDragOver={(e) => onDragOver(e, "inspector")} 
                         onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                 e.dataTransfer.getData("id"),
                                                 "inspector")}
                     >
                         <>
-                            <Typography variant="h5">{object.name}</Typography>
-                            {(object.nickname) && <Typography variant="h6">"{object.nickname}"</Typography>}
+                            <h4>{object.name}</h4>
+                            {(object.nickname) && <h5>"{object.nickname}"</h5>}
                             <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
-                            <Typography variant="body1">{object.description}</Typography>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Button onClick={sendNickname} variant="contained" color="primary">Change Nickname</Button>
+                            <h5>{object.description}</h5>
+                            <Row>
+                                <Col>
+                                    <Button onClick={sendNickname} >Change Nickname</Button>
                                     <input type="text" placeholder="Enter nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} />
-                                </Grid>
-                                <Grid item xs>
-                                    <Button onClick={() => removeObj(object._id, "box")} variant="contained" color="secondary">Remove from box</Button>
-                                </Grid>
-                            </Grid>
+                                </Col>
+                                <Col>
+                                    <Button variant="danger" onClick={() => removeObj(object._id, "box")}>Remove from box</Button>
+                                </Col>
+                            </Row>
                         </>
-                    </Paper>
+                    </div>
                 )
 
             case "inspectTeam": //Team Inspect 
                 return(
-                    <Paper 
+                    <div 
                         onDragOver={(e) => onDragOver(e, "inspector")} 
                         onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                 e.dataTransfer.getData("id"),
                                                 "inspector")}
                     >
                         <>
-                            <Typography variant="h5">{object.name}</Typography>
-                            {(object.nickname) && <Typography variant="h6">"{object.nickname}"</Typography>}
+                            <h4>{object.name}</h4>
+                            {(object.nickname) && <h5>"{object.nickname}"</h5>}
                             <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
-                            <Typography variant="body1">{object.description}</Typography>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Button onClick={sendNickname} variant="contained" color="primary">Change Nickname</Button>
+                            <h5>{object.description}</h5>
+                            <Row>
+                                <Col>
+                                    <Button onClick={sendNickname} >Change Nickname</Button>
                                     <input type="text" placeholder="Enter nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} />
-                                </Grid>
-                                <Grid item xs>
-                                    <Button onClick={() => removeObj(object._id, "team")} variant="contained" color="secondary">Remove from team</Button>
-                                </Grid>
-                            </Grid>
+                                </Col>
+                                <Col>
+                                    <Button variant="danger" onClick={() => removeObj(object._id, "team")} >Remove from team</Button>
+                                </Col>
+                            </Row>
                         </>
-                    </Paper>
+                    </div>
                 )
                 
             default:
                 return(
-                    <Paper
+                    <div
                         onDragOver={(e) => onDragOver(e)} 
                         onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                 e.dataTransfer.getData("id"),
@@ -142,7 +143,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
                         <div height="500px">
                             <h1>Click to Inspect!</h1>
                         </div>
-                    </Paper>
+                    </div>
                 )
         }
     }

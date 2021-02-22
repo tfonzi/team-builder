@@ -1,40 +1,36 @@
-import Paper from '@material-ui/core/Paper'
-import GridList from '@material-ui/core/GridList'
-import GridListTile from '@material-ui/core/GridListTile'
-
 import TeamMember from './TeamMember'
+
+import './components.css'
 
 const Team = ({team, inspect, onDragStart, onDragOver, onDrop}) => {
     
     if(!team){
         return(
-            <Paper onDragOver={(e) => onDragOver(e)} 
+            <div onDragOver={(e) => onDragOver(e)} 
                     onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"), 
                                             e.dataTransfer.getData("id"), 
                                             'team')}
             >
                 <h1>Drag to add to team</h1>
-            </Paper>
+            </div>
         )
     }
     else{
         return (
-            <Paper onDragOver={(e) => onDragOver(e)} 
+            <div onDragOver={(e) => onDragOver(e)} 
                     onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"), 
                                             e.dataTransfer.getData("id"), 
                                             'team')}
             >
-                <h1>Team</h1>
-                <Paper>
-                    <GridList cols={3} spacing={3}>
-                        {team.map((obj) => (
-                        <GridListTile key={obj._id}>
-                            <TeamMember key={obj._id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
-                        </GridListTile>
-                        ))}
-                    </GridList>
-                </Paper>
-            </Paper>
+                <h3 className="team-header">Team</h3>
+                <div className ="team-flex">
+                    {team.map((obj) => (
+                    <div className="team-object" key={obj._id}>
+                        <TeamMember key={obj._id} onDragStart={onDragStart} inspect={inspect} obj={obj} />
+                    </div>
+                    ))}
+                </div>
+            </div>
         )
     }
 }

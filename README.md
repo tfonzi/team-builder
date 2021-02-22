@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Azure Deployment
+
+Frontend: https://berry-team-builder.azurewebsites.net/ 
+
+Backend: https://btb-backend.azurewebsites.net/
+
 ## Available Scripts
 
 In the project directory, you can run:

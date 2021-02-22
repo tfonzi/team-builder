@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import axios from 'axios';
 
-
 import MenuBar from './components/MenuBar'
 import Team from './components/Team'
 import Berries from './components/Berries'
@@ -11,8 +10,11 @@ import Inspector from './components/Inspector'
 import Box from './components/Box'
 import Debug from './components/Debug'
 
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 
 
 const App = () => {
@@ -167,7 +169,7 @@ const App = () => {
       return //Nothing Happens
     }
 
-    if(destination == team){
+    if(destination == "team"){
       if(team.length >= 6){
         console.log("Cancelled action due to team being full")
         alert("Cannot add more than 6 members to team.")
@@ -348,23 +350,24 @@ const App = () => {
     <div>
       <Router>
         <Route path='/' exact render={(props) => (
-            <>
-              <MenuBar title="Berry Team Builder" berryView={changeViewToBerries} teamView={changeViewToTeams} pokemonCatalogView={changeViewToPokemonCatalog} />
-              
-              <Grid container>
-                <Grid item>
-                  <Paper height="500">
+          <>
+            <MenuBar title="Berry Team Builder" berryView={changeViewToBerries} teamView={changeViewToTeams} pokemonCatalogView={changeViewToPokemonCatalog} />
+            <Container fluid>
+              <Row>
+                <Col>
                     {(teamBerriesToggle == "teamView") && <Team onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} inspect={inspectTeam} team={team} />}
                     {(teamBerriesToggle == "berryCatalogView") && <Berries onDragStart={onDragStart} inspect={inspectBerry} berries={berryCatalog} />}
-                    {(teamBerriesToggle == "pokemonCatalogView") && <PokemonCatalog onDragStart={onDragStart} inspect={inspectBerry} pokemons={pokemonCatalog} />}
-                  </Paper>
-                </Grid>
-                <Grid item>
+                    {(teamBerriesToggle == "pokemonCatalogView") && <PokemonCatalog onDragStart={onDragStart} inspect={inspectBerry} pokemons={pokemonCatalog} />} 
+                </Col>
+                <Col>
                   <Inspector  onDragOver={onDragOver} onDrop={onDrop} view={inspectView} object={inspectData} updateNickname={updateNickname} AddObjectToBox={addObjToBox} AddObjectToTeam={addObjToTeam} removeObj={removeObj} />
-                </Grid>
-              </Grid>
+                </Col>
+              </Row>
+            </Container>
+            <Container>
               <Box onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} inspect={inspectBox} box={box} />
-            </>
+            </Container>
+          </>
           )} />
         <Route path='/debug' exact render={(props) => (
           <Debug addBerry={addBerryToCatalog}/>
