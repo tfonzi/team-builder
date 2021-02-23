@@ -11,6 +11,7 @@ import Box from './components/Box'
 import Debug from './components/Debug'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./components/components.css"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -351,22 +352,22 @@ const App = () => {
       <Router>
         <Route path='/' exact render={(props) => (
           <>
-            <MenuBar title="Berry Team Builder" berryView={changeViewToBerries} teamView={changeViewToTeams} pokemonCatalogView={changeViewToPokemonCatalog} />
-            <Container fluid>
+            <MenuBar berryView={changeViewToBerries} teamView={changeViewToTeams} pokemonCatalogView={changeViewToPokemonCatalog} />
+            <Container fluid className="topSideView">
               <Row>
-                <Col>
+                <Col xs={4} md={6}> {/*Natively one column is 25% while the other is 75%. On desktop, it switches to 50-50 */}
                     {(teamBerriesToggle == "teamView") && <Team onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} inspect={inspectTeam} team={team} />}
                     {(teamBerriesToggle == "berryCatalogView") && <Berries onDragStart={onDragStart} inspect={inspectBerry} berries={berryCatalog} />}
                     {(teamBerriesToggle == "pokemonCatalogView") && <PokemonCatalog onDragStart={onDragStart} inspect={inspectBerry} pokemons={pokemonCatalog} />} 
                 </Col>
-                <Col>
-                  <Inspector  onDragOver={onDragOver} onDrop={onDrop} view={inspectView} object={inspectData} updateNickname={updateNickname} AddObjectToBox={addObjToBox} AddObjectToTeam={addObjToTeam} removeObj={removeObj} />
+                <Col xs={8} md={6}>
+                  <Inspector onDragOver={onDragOver} onDrop={onDrop} view={inspectView} object={inspectData} updateNickname={updateNickname} AddObjectToBox={addObjToBox} AddObjectToTeam={addObjToTeam} removeObj={removeObj} />
                 </Col>
               </Row>
             </Container>
-            <Container>
+            <Container fluid>
               <Box onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} inspect={inspectBox} box={box} />
-            </Container>
+            </Container> 
           </>
           )} />
         <Route path='/debug' exact render={(props) => (

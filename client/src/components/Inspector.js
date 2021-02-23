@@ -2,6 +2,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
+
+import './components.css'
+
 
 
 
@@ -50,8 +54,8 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
                                         e.dataTransfer.getData("id"),
                                         "inspector")}
             >
-                <div height="500px">
-                    <h1>Click to Inspect!</h1>
+                <div height="60%">
+                    <p>Click to Inspect!</p>
                 </div>
             </div>
         )
@@ -61,14 +65,14 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
 
             case "inspectBerryCatalog": //BerryCatalog Inspect
                 return(
-                        <div 
+                        <div
                             onDragOver={(e) => onDragOver(e, "inspector")} 
                             onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                     e.dataTransfer.getData("id"),
                                                     "inspector")}
                         >
                             <h4>{object.name}</h4>
-                            <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
+                            <Image fluid draggable="false" src={object.image} />
                             <h5>{object.description}</h5>
                             <Row>
                                 <Col>
@@ -82,7 +86,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
                     )
             case "inspectBox": //Box Inspect 
                 return(
-                    <div 
+                    <div
                         onDragOver={(e) => onDragOver(e, "inspector")} 
                         onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                 e.dataTransfer.getData("id"),
@@ -91,7 +95,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
                         <>
                             <h4>{object.name}</h4>
                             {(object.nickname) && <h5>"{object.nickname}"</h5>}
-                            <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
+                            <Image fluid draggable="false" src={object.image}/>
                             <h5>{object.description}</h5>
                             <Row>
                                 <Col>
@@ -108,7 +112,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
 
             case "inspectTeam": //Team Inspect 
                 return(
-                    <div 
+                    <div
                         onDragOver={(e) => onDragOver(e, "inspector")} 
                         onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                 e.dataTransfer.getData("id"),
@@ -117,7 +121,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
                         <>
                             <h4>{object.name}</h4>
                             {(object.nickname) && <h5>"{object.nickname}"</h5>}
-                            <img draggable="false" src={object.image} alt="berry image" width="300" height="300"/>
+                            <Image fluid draggable="false" src={object.image}/>
                             <h5>{object.description}</h5>
                             <Row>
                                 <Col>
@@ -134,7 +138,7 @@ const Inspector = ({view, object, onDragOver, onDrop, updateNickname, AddObjectT
                 
             default:
                 return(
-                    <div
+                    <div className="inspector"
                         onDragOver={(e) => onDragOver(e)} 
                         onDrop={(e) => onDrop(e, e.dataTransfer.getData("source"),
                                                 e.dataTransfer.getData("id"),
