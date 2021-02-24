@@ -1,2 +1,2 @@
 #Removing reference to database key. Use example provided
-.env
+*.env
