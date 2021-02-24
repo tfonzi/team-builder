@@ -1,4 +1,6 @@
-#Removing reference to database key. Use example provided
+#This gitignore removes files for  both front end and back end + env variables. 
+#Use example provided for database key
+
 # dependencies
 /server/node_modules
 /client/node_modules
