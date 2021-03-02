@@ -59,9 +59,9 @@ export const fetchBoxObj = async (req, res) => {
 }
 
 export const addBoxObj = async(req, res) => {
-    const {name, image, description} = req.body
+    const {name, image, description, type} = req.body
 
-    const newBoxObj = new BoxObjData({name, image, description})
+    const newBoxObj = new BoxObjData({name, image, description, type})
 
     try{
         await newBoxObj.save()
@@ -84,11 +84,11 @@ export const deleteBoxObj = async (req, res) => {
 
 export const updateBoxObj = async (req, res) => {
     const { id } = req.params
-    const {name, image, description, nickname } = req.body
+    const {name, image, description, type, nickname } = req.body
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Box Object with id: ${id}`)
 
-    const updatedBoxObj = { name, image, description, nickname, _id: id }
+    const updatedBoxObj = { name, image, description, type, nickname, _id: id }
 
     await BoxObjData.findByIdAndUpdate(id, updatedBoxObj, { new: true })
 
@@ -120,9 +120,9 @@ export const fetchTeamObj = async (req, res) => {
 }
 
 export const addTeamObj = async(req, res) => {
-    const {name, image, description} = req.body
+    const {name, image, description, type} = req.body
 
-    const newTeamObj = new TeamObjData({name, image, description})
+    const newTeamObj = new TeamObjData({name, image, description, type})
 
     try{
         await newTeamObj.save()
@@ -145,11 +145,11 @@ export const deleteTeamObj = async (req, res) => {
 
 export const updateTeamObj = async (req, res) => {
     const { id } = req.params
-    const {name, image, description, nickname } = req.body
+    const {name, image, description, type, nickname } = req.body
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Team Object with id: ${id}`)
 
-    const updatedTeamObj = { name, image, description, nickname, _id: id }
+    const updatedTeamObj = { name, image, description, type, nickname, _id: id }
 
     await TeamObjData.findByIdAndUpdate(id, updatedTeamObj, { new: true })
 
@@ -176,9 +176,10 @@ export const moveTo = async (req,res) => {
                     const name = teamObj.get('name')
                     const image = teamObj.get('image')
                     const description = teamObj.get('description')
+                    const type = teamObj.get('type')
                     const nickname = teamObj.get('nickname')
 
-                    const newBoxObj = new BoxObjData({name, image, description, nickname})
+                    const newBoxObj = new BoxObjData({name, image, description, type, nickname})
                     await newBoxObj.save()
 
                     res.status(200).json(newBoxObj)
@@ -197,9 +198,10 @@ export const moveTo = async (req,res) => {
                     const name = boxObj.get('name')
                     const image = boxObj.get('image')
                     const description = boxObj.get('description')
+                    const type = boxObj.get('type')
                     const nickname = boxObj.get('nickname')
 
-                    const newTeamObj = new TeamObjData({name, image, description, nickname})
+                    const newTeamObj = new TeamObjData({name, image, description, type, nickname})
                     await newTeamObj.save()
 
                     res.status(200).json(newTeamObj)

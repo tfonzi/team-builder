@@ -4,6 +4,7 @@ const teamObjSchema = mongoose.Schema({
     name: String,
     image: String,
     description: String,
+    type: String,
     nickname: {
         type: String,
         default: "",
