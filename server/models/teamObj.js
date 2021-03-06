@@ -9,6 +9,10 @@ const teamObjSchema = mongoose.Schema({
         type: String,
         default: "",
     },
+    moves: {
+        type: Array,
+        default: ["", "", "", ""],
+    },
 })
 
 var TeamObjData = mongoose.model('TeamObjData', teamObjSchema);

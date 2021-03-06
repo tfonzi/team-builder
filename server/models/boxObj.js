@@ -9,6 +9,10 @@ const boxObjSchema = mongoose.Schema({
         type: String,
         default: "",
     },
+    moves: {
+        type: Array,
+        default: ["", "", "", ""],
+    },
 })
 
 var BoxObjData = mongoose.model('BoxObjData', boxObjSchema);
