@@ -4,9 +4,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Azure Deployment
 
-Frontend: https://berry-team-builder.azurewebsites.net/ 
+Deployed using Azure DevOps. Triggers are seperate repos specially for frontend/backend. The team-builder repo has the same contents as the individual repos, though the individual repos have more detailed version history.
 
-Backend: https://btb-backend.azurewebsites.net/
+Front-end Deployment: https://berry-team-builder.azurewebsites.net/ 
+
+Back-end Deployment: https://btb-backend.azurewebsites.net/
+
+Front-end GitHub: https://github.com/tfonzi/btb-frontend/
+
+Back-end GitHub: https://github.com/tfonzi/btb-backend/
 
 ## Available Scripts
 
