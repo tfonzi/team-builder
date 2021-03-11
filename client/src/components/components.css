@@ -166,29 +166,28 @@
     .leftSideView {
         padding-right: 0;
         margin: 0;
+        margin-left: -15px;
     }
 
     .pokemonCatalog-header{
         text-align: center;
         font-size: x-large;
-        margin-left: -10px;
     }
     
     .itemCatalog-header{
         text-align: center;
         font-size: x-large;
-        margin-left: -10px;
     }
     
     .team-header{
         text-align: center;
         font-size: x-large;
-        margin-left: -10px;
+        margin-bottom: 5px;
     }
 
     .box-header{
         position: relative;
-        left: 12%;
+        left: 9%;
         font-size: x-large;
     }
 
@@ -208,12 +207,12 @@
     .pokemonCatalog-flex {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: flex-start;
         align-content: flex-start;
-        width: 110%;
+        width: 100%;
         height: 41vh;
-        float: right;
+        margin: auto;
         height: calc(var(--vh, 1vh) * 41);
         overflow: auto;
         overflow-x: hidden;
@@ -221,7 +220,7 @@
     }
 
     .pokemonCatalog-object {
-        margin: 0.5px;
+        margin: 1px;
         border: 2px solid rgb(208, 230, 233);
         border-radius: 5px;
         height: auto;
@@ -251,12 +250,12 @@
     .itemCatalog-flex {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: flex-start;
         align-content: flex-start;
-        width: 110%;
+        width: 100%;
         height: 41vh;
-        float: right;
+        margin: auto;
         height: calc(var(--vh, 1vh) * 41);
         overflow: auto;
         overflow-x: hidden;
@@ -264,7 +263,7 @@
     }
 
     .itemCatalog-object {
-        margin: 0.5px;
+        margin: 1px;
         border: 2px solid rgb(208, 230, 233);
         border-radius: 5px;
         height: auto;
@@ -272,7 +271,7 @@
     }
 
     .active-itemCatalog-object {
-        margin: 0.5px;
+        margin: 1px;
         border: 2px solid yellow;
         background-color: rgb(208, 230, 233);
         border-radius: 5px;
@@ -294,7 +293,7 @@
     .team-flex {
         display: flex;
         flex-flow: row wrap;
-        justify-content: flex-start;
+        justify-content: space-evenly;
         align-items: flex-start;
         align-content: flex-start;
         width: 100%;
@@ -749,4 +748,57 @@
 
 .navbar-button {
     margin: 5px !important;
+}
+
+.analysis-teamMember{
+    margin-top: 15px;
+}
+
+.analysis-teamMember-name{
+    font-size: x-large;
+    text-transform: capitalize;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.analysis-teamMember-effect{
+    margin-top: 10px;
+    margin-left: -20px;
+}
+
+.analysis-stats {
+    margin: 25px;
+}
+
+.analysis-moves {
+    margin-top: 10px;
+    border-bottom: 3px solid black;
+}
+.analysis-moves-header {
+    font-size: large;
+    font-weight: bold;
+}
+
+.analysis-move{
+    border-top: 2px dotted black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.analysis-move-name {
+    text-transform: capitalize;
+    font-size: medium;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.analysis-move-effect{
+    margin-top: 10px;
+    margin-left: -20px;
+}
+
+.analysis-move-info{
+    font-size: small;
+    text-transform: capitalize;
+    margin: 0px;
 }
