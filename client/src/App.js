@@ -429,7 +429,7 @@ const App = () => {
           pokemon.moves = res.data.moves.map(move => {
             var move_object = {}
             move_object.name = move.move.name
-            move_object.url = move.move.url
+            move_object.url = `https://pokeapi.co/api/v2/move/${move.move.name}`
             return move_object
           })
 
@@ -628,17 +628,16 @@ const closeAnalysis = () => {
               backdrop="static"
               keyboard={false}
               centered
-          >
+            >
               <Modal.Header>
                   Analysis
                   <Button onClick={() => closeAnalysis()} variant="primary"> Close </Button>
               </Modal.Header>
               <Modal.Body>
-                  <Analysis team={team} />
+                <Analysis team={team} />
               </Modal.Body>
               <Modal.Footer></Modal.Footer>
             </Modal>
-
           </>
           )} />
         <Route path='/debug' exact render={(props) => (
